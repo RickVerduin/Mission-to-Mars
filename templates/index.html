@@ -7,15 +7,14 @@
    <title>Mission to Mars</title>
    <link
      rel="stylesheet"
-     href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-   />
+     href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
 </head>
 <body>
     <div class="container">
         <div class="jumbotron text-center">
             <h1>Mission to Mars</h1>
-            <p><a class="btn btn-primary btn-lg" href="/scrape"
-                role="button">Scrape New Data</a></p>
+            <p><a class="btn btn-success btn-lg" href="/scrape"
+                role="button"><i>Scrape New Data</i></a></p>
         <!-- Mars News -->
         <div class="row" id="mars-news">
             <div class="col-md-12">
@@ -23,7 +22,10 @@
                     <div class="media-body">
                         <h2>Latest Mars News</h2>
                         <h4 class="media-heading">{{mars.news_title}}</h4>
-                        <p>{{ mars.news_paragraph }}</p>
+                        <blockquote class="blockquote">
+                            <p>{{ mars.news_paragraph }}</p>
+                            <footer class="blockquote-footer">Source: <cite title="Source Title"><a href="https://redplanetscience.com/">redplanetscience.com</a></cite></footer>
+                        </blockquote>
                     </div>
                 </div>
             </div>
@@ -40,11 +42,19 @@
             </div>
             <div class="col-md-4">
                 <!-- Mars Facts -->
-                <div class="row" id="mars-facts">
-                    <h4>Mars Facts</h4>
+                <div class="row bg-danger" id="mars-facts">
+                    <h4><b>Mars Facts</b></h4>
                     {{ mars.facts | safe }}
                 </div>
             </div>
+        <!-- Mars hemispheres -->
+        <div class="row" id="mars-hemispheres"></div>
+            {% for hemisphere in mars.hemispheres %}
+            <div class="col-md-3">
+                <h4>{{ hemisphere["title"] }}</h4> 
+                <img src={{ hemisphere["img_url"] }} class="img-responsive" alt=""/>
+            </div>
+            {% endfor %}
         </div>
     </div>
 </body>
